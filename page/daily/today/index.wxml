@@ -1,0 +1,23 @@
+<scroll-view scroll-y="true" style="height: 100%"
+    bindscrolltoupper="onRefresh" bindscrolltolower="onLoadMore" 
+    bindscroll="scroll" scroll-into-view="{{toView}}"
+    scroll-top="{{scrollTop}}">
+    <swiper class="dailyTop" indicator-dots="{{true}}"
+        indicator-color="rgba(ff, ff, ff, 0)"
+        autoplay="{{top_stories.autoplay}}"
+        interval="{{top_stories.interval}}"
+        duration="{{top_stories.duration}}">
+        <block wx:for="{{top_stories.background}}">
+            <swiper-item>
+                <image class="imgshow" content="{{item.title}}" lazyload="true" src="{{item.image}}"/>
+            </swiper-item>
+        </block>
+    </swiper>
+    <block wx:for="{{stories.background}}">
+        <text class="dailyTitle" wx:if="{{item.isTitle}}">{{item.title}}</text> 
+        <view class="daily" wx:else style="flex-direction:row;">
+            <image class="imgavatar flex-view-item" lazyload="true" src="{{item.images[0]}}" />
+            <text class="dailyContent flex-view-item">{{item.title}}</text>
+        </view> 
+    </block>
+</scroll-view>
