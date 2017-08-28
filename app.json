@@ -1,6 +1,8 @@
 {
     "pages": [
-        "page/daily/today/index"
+        "page/daily/today/daily",
+        "page/daily/dailydetail/dailydetail",
+        "page/daily/web/web"
     ],
     "window": {
         "navigationBarTextStyle": "black",
@@ -15,27 +17,27 @@
         "backgroundColor": "#ffffff",
         "list": [
             {
-                "pagePath": "page/daily/today/index",
+                "pagePath": "page/daily/today/daily",
                 "iconPath": "image/icon_component.png",
                 "selectedIconPath": "image/icon_component_HL.png",
                 "text": "日报"
             },
             {
-                "pagePath": "page/daily/today/index",
-                "iconPath": "image/icon_component.png",
-                "selectedIconPath": "image/icon_component_HL.png",
+                "pagePath": "page/daily/today/daily",
+                "iconPath": "image/icon_API.png",
+                "selectedIconPath": "image/icon_API_HL.png",
                 "text": "主题"
             },
             {
-                "pagePath": "page/daily/today/index",
+                "pagePath": "page/daily/today/daily",
                 "iconPath": "image/icon_component.png",
                 "selectedIconPath": "image/icon_component_HL.png",
                 "text": "专栏"
             },
             {
-                "pagePath": "page/daily/today/index",
-                "iconPath": "image/icon_component.png",
-                "selectedIconPath": "image/icon_component_HL.png",
+                "pagePath": "page/daily/today/daily",
+                "iconPath": "image/icon_API.png",
+                "selectedIconPath": "image/icon_API_HL.png",
                 "text": "文章"
             }
         ]

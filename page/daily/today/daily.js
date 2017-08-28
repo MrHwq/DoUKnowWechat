@@ -1,5 +1,5 @@
-let DailyBean = require('../bean/DailyBean');
-let TopDailyBean = require('../bean/TopDailyBean');
+let DailyBean = require('../../bean/DailyBean');
+let TopDailyBean = require('../../bean/TopDailyBean');
 let { formatDailyTime } = require('../../../util/util');
 Page({
     data: {
@@ -22,17 +22,30 @@ Page({
     pullDownRefresh: function (event) {
         console.log('pullDownRefresh');
     },
+    setRefreshState: function (isRefresh) {
+        if (isRefresh) {
+            wx.showNavigationBarLoading();
+            wx.showLoading({
+                title: 'loading...'
+            });
+            this.innerData.isRefresh = true;
+            return;
+        }
+        this.innerData.isRefresh = false;
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh({
+            complete: (res) => {
+                wx.hideLoading()
+            }
+        });
+    },
     onRefresh: function (e) {
         if (this.innerData.isRefresh) {
             console.log('onRefresh exit for goinng');
             return;
         }
-        this.innerData.isRefresh = true;
+        this.setRefreshState(true);
         let baseUrl = 'http://news-at.zhihu.com/api/4/';
-        wx.showToast({
-            title: 'loading...',
-            icon: 'loading'
-        });
         wx.request({
             url: baseUrl + 'stories/latest',
             success: (response) => {
@@ -56,13 +69,7 @@ Page({
             },
             complete: () => {
                 console.log('request complete');
-                this.innerData.isRefresh = false;
-                wx.stopPullDownRefresh({
-                    complete: (res) => {
-                        wx.hideToast()
-                        console.log(res, new Date())
-                    }
-                });
+                this.setRefreshState(false);
             }
         });
     },
@@ -71,11 +78,7 @@ Page({
             console.log('onLoadMore exit for goinng');
             return;
         }
-        wx.showToast({
-            title: 'loading...',
-            icon: 'loading'
-        });
-        this.innerData.isRefresh = true;
+        this.setRefreshState(true);
         let baseUrl = 'http://news-at.zhihu.com/api/4/';
         wx.request({
             url: baseUrl + 'stories/before/' + this.innerData.currentTime,
@@ -98,13 +101,7 @@ Page({
             },
             complete: () => {
                 console.log('request complete');
-                this.innerData.isRefresh = false;
-                wx.stopPullDownRefresh({
-                    complete: (res) => {
-                        wx.hideToast()
-                        console.log(res, new Date())
-                    }
-                });
+                this.setRefreshState(false);
             }
         });
     },
@@ -112,6 +109,22 @@ Page({
         console.log('daily onLoad')
         console.log(options);
         this.onRefresh();
+    },
+    onTapNews: function (object) {
+        let id = object.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../dailydetail/dailydetail?id=' + id,
+            success: (resp) => {
+                console.log(resp);
+            },
+            fail: (fail) => {
+                console.error(fail);
+            },
+            complete: () => {
+                console.log('complete');
+            }
+        });
+        console.log(id);
     },
     // Do something when page ready.
     onShow: function () {
@@ -157,10 +170,12 @@ Page({
         });
     },
     scroll: function (e) {
-        console.log('scroll:' + e)
+        console.log('scroll:');
+        console.log(e);
     },
     scrollToTop: function (e) {
-        console.log('scrollToTop:' + e);
+        console.log('scrollToTop:');
+        console.log(e);
         this.setAction({
             scrollTop: 0
         })

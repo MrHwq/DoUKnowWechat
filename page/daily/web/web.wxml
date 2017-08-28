@@ -1,0 +1,8 @@
+<import src="../../../wxParse/wxParse.wxml"/>
+
+<scroll-view scroll-y="true" style="height: 100%"
+    bindscrolltoupper="onRefresh" bindscrolltolower="onLoadMore" 
+    bindscroll="scroll" scroll-into-view="{{toView}}"
+    scroll-top="{{scrollTop}}">
+    <template class="dailyContent" is="wxParse" data="{{wxParseData:article.nodes}}"/>
+</scroll-view>

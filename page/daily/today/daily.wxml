@@ -15,7 +15,7 @@
     </swiper>
     <block wx:for="{{stories.background}}">
         <text class="dailyTitle" wx:if="{{item.isTitle}}">{{item.title}}</text> 
-        <view class="daily" wx:else style="flex-direction:row;">
+        <view class="daily" wx:else style="flex-direction:row;" data-id="{{item.id}}" bindtap='onTapNews'>
             <image class="imgavatar flex-view-item" lazyload="true" src="{{item.images[0]}}" />
             <text class="dailyContent flex-view-item">{{item.title}}</text>
         </view> 
