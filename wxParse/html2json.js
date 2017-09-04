@@ -42,6 +42,7 @@ function makeMap(str) {
     return obj;
 }
 
+let debug = false;
 function q(v) {
     return '"' + v + '"';
 }
@@ -109,14 +110,18 @@ function html2json(html, bindName) {
                     var name = attr.name;
                     var value = attr.value;
                     if (name == 'class') {
-                        console.dir(value);
+                        if (debug) {
+                            console.dir(value);
+                        }
                         //  value = value.join("")
                         node.classStr = value;
                     }
                     // has multi attibutes
                     // make it array of attribute
                     if (name == 'style') {
-                        console.dir(value);
+                        if (debug) {
+                            console.dir(value);
+                        }
                         //  value = value.join("")
                         node.styleStr = value;
                     }

@@ -1,4 +1,5 @@
 @import "/wxParse/wxParse.wxss";
+
 .swiper-item{
     display: block;
     height: 150px;
@@ -28,7 +29,7 @@
 }
 
 
-
+/*  */
 article,
 aside,
 details,
@@ -389,9 +390,9 @@ ol {
 .button i {
   margin-right: 0;
 }
-.headline .img-place-holder {
+/* .headline .img-place-holder {
   height: 200px;
-}
+} */
 .from-column {
   width: 280px;
   line-height: 30px;
@@ -934,6 +935,7 @@ body.dudu-night,
   background-image: url(http://static.daily.zhihu.com/img/Dark_News_Column_Entrance_Highlight.png);
 }
 
+/* 禁用头部下面的分隔线 */
 .dudu .headline {
   border-bottom: none;
 }

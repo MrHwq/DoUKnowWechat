@@ -1,6 +1,7 @@
 {
     "pages": [
         "page/daily/today/daily",
+        "page/daily/hot/hot",
         "page/daily/dailydetail/dailydetail",
         "page/daily/web/web"
     ],
@@ -35,7 +36,7 @@
                 "text": "专栏"
             },
             {
-                "pagePath": "page/daily/today/daily",
+                "pagePath": "page/daily/hot/hot",
                 "iconPath": "image/icon_API.png",
                 "selectedIconPath": "image/icon_API_HL.png",
                 "text": "文章"

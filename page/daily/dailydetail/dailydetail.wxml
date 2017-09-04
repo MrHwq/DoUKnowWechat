@@ -4,6 +4,6 @@
     bindscrolltoupper="onRefresh" bindscrolltolower="onLoadMore" 
     bindscroll="scroll" scroll-into-view="{{toView}}"
     scroll-top="{{scrollTop}}">
-    <template class="dailyContent" is="wxParse" data="{{wxParseData:article.nodes}}"/>
-    <!-- <image class="dailyTop" lazyload="true" src="{{detail.image}}"/> -->
+    <image class="dailyTop" lazyload="true" src="{{image}}"  wx:if="{{image != undefined}}"/>
+    <template class="dailyContent" is="wxParse" data="{{wxParseData:article.nodes}}"/> 
 </scroll-view>

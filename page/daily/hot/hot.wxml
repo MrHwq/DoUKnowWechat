@@ -1,0 +1,11 @@
+<scroll-view scroll-y="true" style="height: 100%"
+    bindscrolltoupper="onRefresh" bindscrolltolower="onLoadMore" 
+    bindscroll="scroll" scroll-into-view="{{toView}}"
+    scroll-top="{{scrollTop}}">
+    <block wx:for="{{recent}}">
+        <view class="daily" style="flex-direction:row;" data-item="{{item}}" bindtap='onTapNews'>
+            <image class="imgavatar flex-view-item" lazyload="true" src="{{item.thumbnail}}" />
+            <text class="dailyContent flex-view-item">{{item.title}}</text>
+        </view> 
+    </block>
+</scroll-view>

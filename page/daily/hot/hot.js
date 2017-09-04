@@ -1,9 +1,8 @@
-let DailyBean = require('../../bean/DailyBean');
-let TopDailyBean = require('../../bean/TopDailyBean');
 let IZhihuApiService = require('../../service/IZhihuApiService');
-let { formatDailyTime } = require('../../../util/util');
+let { HotNewsBean, HotNewsInfo } = require('../../bean/HotNewsBean');
 Page({
     data: {
+        recent: [],
         top_stories: {
             background: [],
             indicatorDots: true,
@@ -16,9 +15,8 @@ Page({
             background: [],
         }
     },
-    TAG: 'daily',
+    TAG: 'hotnews',
     innerData: {
-        currentTime: undefined,
         isRefresh: false,
         service: new IZhihuApiService()
     },
@@ -48,31 +46,10 @@ Page({
             return;
         }
         this.setRefreshState(true);
-        this.innerData.service.getLatestNews({
+        this.innerData.service.getHotNews({
             success: (response) => {
-                this.innerData.currentTime = response.data.date;
-                this.setData({
-                    top_stories: {
-                        background: [].concat(
-                            response.data.top_stories.map((item) => {
-                                let bean = new TopDailyBean(item);
-                                return bean;
-                            }))
-                    },
-                    stories: {
-                        background: [new DailyBean({ title: '今日新闻', isTitle: true })].concat(
-                            response.data.stories.map((item) => {
-                                let bean = new DailyBean(item);
-                                return bean;
-                            }))
-                    }
-                })
-            },
-            fail: (fail) => {
-                wx.showModal({
-                    title: '错误',
-                    content: '获取内容错误' + fail,
-                });
+                let hotNews = new HotNewsBean(response.data);
+                this.setData({ recent: hotNews.recent });
             },
             complete: () => {
                 console.log(this.TAG, 'request complete');
@@ -81,35 +58,7 @@ Page({
         });
     },
     onLoadMore: function (e) {
-        if (this.innerData.isRefresh) {
-            console.log(this.TAG, 'onLoadMore exit for goinng');
-            return;
-        }
-        this.setRefreshState(true);
-        this.innerData.service.getBeforeNews({
-            date: this.innerData.currentTime,
-            success: (response) => {
-                let stories = this.data.stories.background;
-                stories.push(new DailyBean({
-                    title: formatDailyTime(response.data.date),
-                    isTitle: true
-                }));
-                this.innerData.currentTime = response.data.date;
-                this.setData({
-                    stories: {
-                        background: stories.concat(
-                            response.data.stories.map((item) => {
-                                let bean = new DailyBean(item);
-                                return bean;
-                            }))
-                    }
-                })
-            },
-            complete: () => {
-                console.log(this.TAG, 'request complete');
-                this.setRefreshState(false);
-            }
-        });
+        console.log(this.TAG, 'onLoadMore nothing');
     },
     onLoad: function (options) {
         console.log(this.TAG, 'onLoad', options);
@@ -118,7 +67,7 @@ Page({
     onTapNews: function (object) {
         let item = object.currentTarget.dataset.item;
         wx.navigateTo({
-            url: `../dailydetail/dailydetail?id=${item.id}&image=${item.images[0]}`,
+            url: `../dailydetail/dailydetail?id=${item.news_id}&image=${item.thumbnail}`,
             success: (resp) => {
                 console.log(this.TAG, resp);
             },
