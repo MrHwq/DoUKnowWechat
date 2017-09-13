@@ -85,7 +85,7 @@ Page({
             }
         });
     },
-    wxParseTagATap: (object) => {
+    wxParseTagATap: function (object) {
         console.log(this.TAG, object);
         let dataset = object.currentTarget.dataset;
         if (!dataset || !dataset.src) {

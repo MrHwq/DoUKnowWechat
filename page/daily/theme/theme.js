@@ -1,10 +1,10 @@
 let IZhihuApiService = require('../../service/IZhihuApiService');
-let { HotNewsBean, HotNewsInfo } = require('../../bean/HotNewsBean');
+let { ThemesDetailsBean, SubjectDailyBean } = require('../../bean/ThemesDetailsBean');
 Page({
     data: {
-        recent: [],
+        others: [],
     },
-    TAG: 'hotnews',
+    TAG: 'theme',
     innerData: {
         isRefresh: false,
         service: new IZhihuApiService()
@@ -35,10 +35,10 @@ Page({
             return;
         }
         this.setRefreshState(true);
-        this.innerData.service.getHotNews({
+        this.innerData.service.getDailyType({
             success: (response) => {
-                let hotNews = new HotNewsBean(response.data);
-                this.setData({ recent: hotNews.recent });
+                let theme = new ThemesDetailsBean(response.data);
+                this.setData({ others: theme.others });
             },
             complete: () => {
                 console.log(this.TAG, 'request complete');

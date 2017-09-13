@@ -2,10 +2,10 @@
     bindscrolltoupper="onRefresh" bindscrolltolower="onLoadMore" 
     bindscroll="scroll" scroll-into-view="{{toView}}"
     scroll-top="{{scrollTop}}">
-    <block wx:for="{{recent}}" wx:key="${item.id}}">
+    <block wx:for="{{sections}}" wx:key="{{item.id}}">
         <view class="daily" style="flex-direction:row;" data-item="{{item}}" bindtap='onTapNews'>
             <image class="imgavatar flex-view-item" lazyload="true" src="{{item.thumbnail}}" />
-            <text class="dailyContent flex-view-item">{{item.title}}</text>
+            <text class="dailyContent flex-view-item">{{item.name}}</text>
         </view> 
     </block>
 </scroll-view>

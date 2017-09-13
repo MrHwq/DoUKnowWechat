@@ -7,13 +7,13 @@
         autoplay="{{top_stories.autoplay}}"
         interval="{{top_stories.interval}}"
         duration="{{top_stories.duration}}">
-        <block wx:for="{{top_stories.background}}">
+        <block wx:for="{{top_stories.background}}" wx:key="${item.id}}">
             <swiper-item>
                 <image class="imgshow" content="{{item.title}}" lazyload="true" src="{{item.image}}"/>
             </swiper-item>
         </block>
     </swiper>
-    <block wx:for="{{stories.background}}">
+    <block wx:for="{{stories.background}}" wx:key="${item.id}}">
         <text class="dailyTitle" wx:if="{{item.isTitle}}">{{item.title}}</text> 
         <view class="daily" wx:else style="flex-direction:row;" data-item="{{item}}" bindtap='onTapNews'>
             <image class="imgavatar flex-view-item" lazyload="true" src="{{item.images[0]}}" />

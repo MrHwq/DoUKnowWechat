@@ -1,10 +1,10 @@
 let IZhihuApiService = require('../../service/IZhihuApiService');
-let { HotNewsBean, HotNewsInfo } = require('../../bean/HotNewsBean');
+let { SectionsBean, SectionInfoBean } = require('../../bean/SectionsBean');
 Page({
     data: {
-        recent: [],
+        sections: [],
     },
-    TAG: 'hotnews',
+    TAG: 'sections',
     innerData: {
         isRefresh: false,
         service: new IZhihuApiService()
@@ -35,10 +35,11 @@ Page({
             return;
         }
         this.setRefreshState(true);
-        this.innerData.service.getHotNews({
+        this.innerData.service.getSections({
             success: (response) => {
-                let hotNews = new HotNewsBean(response.data);
-                this.setData({ recent: hotNews.recent });
+                let sections = new SectionsBean(response.data);
+                console.log(this.TAG, sections);
+                this.setData({ sections: sections.data });
             },
             complete: () => {
                 console.log(this.TAG, 'request complete');

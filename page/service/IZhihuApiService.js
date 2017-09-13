@@ -22,6 +22,31 @@ class IZhihuApiService {
         options.url = `${this.baseUrl}/story/${options.id}`;
         wx.request(options);
     }
+
+    getSections(options) {
+        options.url = `${this.baseUrl}/sections`;
+        wx.request(options);
+    }
+
+    getSectionsDetails(options) {
+        options.url = `${this.baseUrl}/sections/${options.id}`;
+        wx.request(options);
+    }
+
+    getBeforeSectionsDetails(options) {
+        options.url = `${this.baseUrl}/sections/${options.id}/before/${options.timestamp}`;
+        wx.request(options);
+    }
+
+    getDailyType(options) {
+        options.url = `${this.baseUrl}/themes`;
+        wx.request(options);
+    }
+
+    getThemesDetailsById(options) {
+        options.url = `${this.baseUrl}/themes/${options.id}`;
+        wx.request(options);
+    }
 }
 
 module.exports = IZhihuApiService;
